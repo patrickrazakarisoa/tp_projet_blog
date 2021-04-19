@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: rgb(177, 177, 177);
 }
 .haut {
   height: 500px;
@@ -14,7 +15,7 @@ body {
 
 ul {
   display: flex;
-  background-color: rgb(57, 43, 43);
+  background-color: rgb(37, 37, 37);
   list-style: none;
 }
 
@@ -40,15 +41,20 @@ ul > li > a:hover {
 }
 
 article {
-  height: 300px;
-  width: 300px;
+  height: auto;
+  width: auto;
   /* border: 2px solid black; */
   margin: 2%;
   text-align: center;
   border-radius: 10px;
-  background-color: rgba(57, 43, 43, 0.5);
+  /* background-color: rgba(57, 43, 43, 0.5); */
+  background-color: rgb(132, 132, 132);
 }
 
 a > h1 {
   text-decoration: none;
+}
+
+.bas > article > a {
+  padding: 2%;
 }

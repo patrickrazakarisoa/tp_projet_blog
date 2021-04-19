@@ -4,22 +4,23 @@
 {% endblock %}
 
 {% block body %}
-	<div class="haut">
-	  	<ul>
-		 	<li><a href="">Acceuil</a></li>
-               <li><a href="">Ajouter</a></li>
-               <li><a href="">A propos</a></li>
-          </ul>
-	</div>
+
 	<div class="bas">
 	{% for article in articles %}
 		{# {{ dump(article)}} #}
 		<article>
+               {# <img src="https://picsum.photos/300/200?random=1"> #}
+			 {% for image in article.images %} 
+                        <figure class="container-img">
+                            <img class="img_article" src="{{'uploads/' ~ image.name }}">
+                        </figure>
+                    {% endfor %} 
+			
 			<a href=" {{ path('detail_article', {id:article.name}) }}">
 				<h1>{{ article.name }}</h1>
 			</a>
-			<a href="{{ path('edit-article', {id : article.id}) }}" class="btn btn-warning">Modifier</a>
-			<a href="{{ path('delete-article', {id : article.id}) }}" class="btn btn-danger">Supprimer</a>
+			<a href="{{ path('edit-article', {id : article.id}) }}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+			<a href="{{ path('delete-article', {id : article.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
 		</article>
 		{% endfor %}
 	</div>
