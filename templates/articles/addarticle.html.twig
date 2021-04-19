@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Ajouter un article
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="container">
+		<h1>
+			Ajouter un article
+		</h1>
+		{{form(form)}}
+
+		</div>
+
+		{# {{ form_start(form) }}
+																			
+		<div class="row mt-4">
+			<div class="col">
+				{{ form_label(form.name, 'Nom de l\'article') }}
+					{{ form_widget(form.name) }}
+					</div>
+				</div>
+				<div class="row">
+		
+				<div class="col">
+				{{ form_row(form.price, {'attr': {'class': 'priceColor'}}) }}
+				</div>
+				<div class="col">
+				{{ form_row(form.date) }}
+				</div>
+				<div class="col">
+				{{ form_row(form.description) }}
+				</div>
+				
+				</div>
+		{{ form_end(form) }} #}
+
+	{% endblock %}

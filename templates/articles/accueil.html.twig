@@ -4,16 +4,23 @@
 {% endblock %}
 
 {% block body %}
-	<div class="haut"></div>
-		<div class="bas">
-			{% for post in posts %}
-			{# {{ dump(post)}} #}
-			<article>
-				<a href="{{ path('detail_article', {id:post.title}) }}">
-					<h1>{{ post.title }}</h1>
-				</a>
-			</article>
-            	{% endfor %}
-		</div>
+	<div class="haut">
+	  	<ul>
+		 	<li><a href="">Acceuil</a></li>
+               <li><a href="">Ajouter</a></li>
+               <li><a href="">A propos</a></li>
+          </ul>
 	</div>
-{% endblock %}
+	<div class="bas">
+	{% for article in articles %}
+		{# {{ dump(article)}} #}
+		<article>
+			<a href=" {{ path('detail_article', {id:article.name}) }}">
+				<h1>{{ article.name }}</h1>
+			</a>
+			<a href="{{ path('edit-article', {id : article.id}) }}" class="btn btn-warning">Modifier</a>
+			<a href="{{ path('delete-article', {id : article.id}) }}" class="btn btn-danger">Supprimer</a>
+		</article>
+		{% endfor %}
+	</div>
+</div>{% endblock %}
