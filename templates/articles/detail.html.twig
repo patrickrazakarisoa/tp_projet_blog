@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}détails article
+{% endblock %}
+
+{% block body %}
+<div class="haut"></div>
+     <div class="bas">
+                    {% for post in posts %}
+
+          <article>
+                    <h1>{{ post.title }}</h1>
+                    <h1>{{ post.description }}</h1>
+                    <h1>{{ post.category }}</h1>
+               {% endfor %}
+          </article>
+     </div>
+</div>
+{% endblock %}
+
+

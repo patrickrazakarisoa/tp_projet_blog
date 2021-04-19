@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome!
+{% endblock %}
+
+{% block body %}
+	<div class="haut"></div>
+		<div class="bas">
+			{% for post in posts %}
+			{# {{ dump(post)}} #}
+			<article>
+				<a href="{{ path('detail_article', {id:post.title}) }}">
+					<h1>{{ post.title }}</h1>
+				</a>
+			</article>
+            	{% endfor %}
+		</div>
+	</div>
+{% endblock %}
