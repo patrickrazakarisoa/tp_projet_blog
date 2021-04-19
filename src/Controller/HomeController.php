@@ -35,63 +35,63 @@ class HomeController extends AbstractController
      //      return new Response("<h1> Bonjour $name </h1>");
      // }
 
-     // /**
-     //  * @route("/", name="page_acceuil")
-     //  */
-     // public function home()
-     // {
+     /**
+      * @route("/moi", name="page_acceuil")
+      */
+     public function home()
+     {
 
-     //      $posts = [
-     //           [
-     //                'title' => 'Article 1',
-     //                'description' => 'Lorem ipsum',
-     //                'category' => 'animaux'
-     //           ],
-     //           [
-     //                'title' => 'Article 2',
-     //                'description' => 'Lorem ipsum',
-     //                'category' => 'enfant'
-     //           ],
-     //           [
-     //                'title' => 'Article 3',
-     //                'description' => 'Lorem ipsum',
-     //                'category' => 'deco'
-     //           ],
-     //      ];
+          $posts = [
+               [
+                    'title' => 'Article 1',
+                    'description' => 'Lorem ipsum',
+                    'category' => 'animaux'
+               ],
+               [
+                    'title' => 'Article 2',
+                    'description' => 'Lorem ipsum',
+                    'category' => 'enfant'
+               ],
+               [
+                    'title' => 'Article 3',
+                    'description' => 'Lorem ipsum',
+                    'category' => 'deco'
+               ],
+          ];
 
-     //      // return $this->render('articles/accueil.html.twig', [
-     //      //      'posts' => $posts,
-     //      // ]);
-     // }
+          return $this->render('articles/accueil.html.twig', [
+               'posts' => $posts,
+          ]);
+     }
 
-     // /**
-     //  * @route("/{id}", name="detail_article")
-     //  */
-     // public function detail_article($id)
-     // {
+     /**
+      * @route("/moi/{id}", name="detail_article_lol")
+      */
+     public function detail_article($id)
+     {
 
-     //      $posts = [
-     //           [
-     //                'title' => 'Article 1',
-     //                'description' => 'Lorem ipsum',
-     //                'category' => 'animaux'
-     //           ],
-     //           [
-     //                'title' => 'Article 2',
-     //                'description' => 'Lorem ipsum',
-     //                'category' => 'enfant'
-     //           ],
-     //           [
-     //                'title' => 'Article 3',
-     //                'description' => 'Lorem ipsum',
-     //                'category' => 'deco'
-     //           ],
-     //      ];
+          $posts = [
+               [
+                    'title' => 'Article 1',
+                    'description' => 'Lorem ipsum',
+                    'category' => 'animaux'
+               ],
+               [
+                    'title' => 'Article 2',
+                    'description' => 'Lorem ipsum',
+                    'category' => 'enfant'
+               ],
+               [
+                    'title' => 'Article 3',
+                    'description' => 'Lorem ipsum',
+                    'category' => 'deco'
+               ],
+          ];
 
 
-     //      // return $this->render('articles/detail.html.twig', [
-     //      //      "id" => $id,
-     //      //      "posts" => $posts,
-     //      // ]);
-     // }
+          return $this->render('articles/detail.html.twig', [
+               "id" => $id,
+               "posts" => $posts,
+          ]);
+     }
 }

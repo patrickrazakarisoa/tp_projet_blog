@@ -3,36 +3,32 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Form\ArticleType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Product;
-use App\Form\ProductType;
-use App\Entity\Images;
 use Symfony\Component\HttpFoundation\Request;
 
 
 class ArticleController extends AbstractController
 {
-     // ---------------------------  PRODUCT  -----------------------------------------
-
      /**
       * @Route("/", name="affichage-article")
       */
-     public function affichage()
+     public function index()
      {
           $articles = $this->getDoctrine()->getRepository(Article::class)->findAll();
-          return $this->render('article/acceuil.html.twig', [
+          return $this->render('articles/accueil.html.twig', [
                'articles' => $articles
           ]);
      }
 
      /**
-      *@Route("/product/{id}", name="product")
+      *@Route("/article/{id}", name="detail_article")
       */
      public function article($id)
      {
-          $article = $this->getDoctrine()->getRepository(Product::class)->find($id);
-          return $this->render('article/detail.html.twig', [
+          $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
+          return $this->render('articles/detail.html.twig', [
                "id" => $id,
                "article" => $article
           ]);
@@ -47,7 +43,7 @@ class ArticleController extends AbstractController
      public function addProduct(Request $request)
      {
           $new_article = new Article;
-          $form = $this->createForm(ProductType::class, $new_article);
+          $form = $this->createForm(ArticleType::class, $new_article);
           $form->handleRequest($request);
 
           if ($form->isSubmitted() && $form->isValid()) {
@@ -56,23 +52,23 @@ class ArticleController extends AbstractController
                $entityManager->persist($new_article);
                $entityManager->flush();
 
-               return $this->redirectToRoute('affichage-product');
+               return $this->redirectToRoute('add-article');
           }
 
-          $this->addFlash("product_add_success", "Votre article a été ajouté avec succès");
-          return $this->render('gestion/addarticle.html.twig', [
+          // $this->addFlash("article_add_success", "Votre article a été ajouté avec succès");
+          return $this->render('articles/addarticle.html.twig', [
                "form" => $form->createView()
           ]);
      }
 
      /**
-      * @Route("/admin/edit-article/{id}", name="edit-article")
+      * @Route("/edit-article/{id}", name="edit-article")
       */
 
-     public function editProduct($id, Request $request)
+     public function editArticle($id, Request $request)
      {
-          $article = $this->getDoctrine()->getRepository(Product::class)->find($id);
-          $form = $this->createForm(ProductType::class, $article);
+          $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
+          $form = $this->createForm(ArticleType::class, $article);
           $form->handleRequest($request);
 
           if ($form->isSubmitted() && $form->isValid()) {
@@ -83,8 +79,9 @@ class ArticleController extends AbstractController
                return $this->redirectToRoute('affichage-article');
           }
 
-          $this->addFlash("product_edit_success", "Votre produit a été modifier avec succès");
-          return $this->render('gestion/addproduct.html.twig', [
+          // $this->addFlash("article_edit_success", "Votre produit a été modifier avec succès");
+          return $this->render('articles/addarticle.html.twig', [
+               "id" => $id,
                "article" => $article,
                "form" => $form->createView()
           ]);
@@ -97,9 +94,9 @@ class ArticleController extends AbstractController
      public function deleteArticle($id)
      {
           $entityManager = $this->getDoctrine()->getManager();
-          $products = $entityManager->getRepository(Product::class)->find($id);
+          $articles = $entityManager->getRepository(Article::class)->find($id);
 
-          $entityManager->remove($products);
+          $entityManager->remove($articles);
           $entityManager->flush();
 
           $this->addFlash("article_delete_success", "Votre article a été supprimer avec succès");
