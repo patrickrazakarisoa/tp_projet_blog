@@ -16,7 +16,9 @@ class ArticleType extends AbstractType
         $builder
             ->add('name')
             ->add('price')
-            ->add('date')
+            ->add('date', DateType::class, [
+                'years' => range(1900, (date('Y') - 18))
+            ])
             // On ajoute le champ "images" dans le formulaire
             // Il n'est pas lié à la base de données (mapped à false)
             ->add('images', FileType::class, [
