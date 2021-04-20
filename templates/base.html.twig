@@ -11,6 +11,8 @@
 		{% block stylesheets %}
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 			<link rel="stylesheet" href="css/st.css">
+			<link rel="stylesheet" href="css/st.css">
+
 		{% endblock %}
 
 		{% block javascripts %}
@@ -18,19 +20,23 @@
 		{% endblock %}
 	</head>
 	<body>
-		<div class="haut">
-			<ul>
-			{% if is_granted('ROLE_ADMIN') %}
-				<li><a href="{{ path('affichage-article')}}">Acceuil</a></li>
-				<li><a href="{{ path('add-article')}}">Ajouter</a></li>
-				<li><a href="{{ path('app_logout')}}">Déconnexion</a></li>
-			{% else %}
-				<li><a href="{{ path('affichage-article')}}">Acceuil</a></li>
-				<li><a href="{{ path('app_register')}}">Inscription</a></li>
-				<li><a href="{{ path('app_login')}}">Connexion</a></li>
-			{% endif %}
-			</ul>
-		</div>
+	<div class="haut">
+		<ul>
+		{% if is_granted('ROLE_ADMIN') %}
+			<li><a href="{{ path('affichage-article')}}">Acceuil</a></li>
+			<li><a href="{{ path('add-article')}}">Ajouter</a></li>
+			<li><a href="{{ path('app_logout')}}">Déconnexion</a></li>
+		{% elseif is_granted('ROLE_USER') %}
+			<li><a href="{{ path('affichage-article')}}">Acceuil</a></li>
+			<li><a href="{{ path('app_logout')}}">Déconnexion</a></li>
+		{% else %}
+			<li><a href="{{ path('affichage-article')}}">Acceuil</a></li>
+			<li><a href="{{ path('app_register')}}">Inscription</a></li>
+			<li><a href="{{ path('app_login')}}">Connexion</a></li>
+		{% endif %}
+
+		</ul>
+	</div>
 		{% block body %}
 	
 		{% endblock %}

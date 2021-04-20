@@ -25,7 +25,7 @@ class ArticleController extends AbstractController
      }
 
      /**
-      *@Route("/article/{id}", name="detail_article")
+      *@Route("/{id}", name="detail_article")
       */
      public function article($id)
      {
