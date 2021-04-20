@@ -58,3 +58,10 @@ a > h1 {
 .bas > article > a {
   padding: 2%;
 }
+
+.detail {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  /* flex-wrap: wrap; */
+}

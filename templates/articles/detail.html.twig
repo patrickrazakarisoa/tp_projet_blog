@@ -4,18 +4,22 @@
 {% endblock %}
 
 {% block body %}
-<div class="haut"></div>
-     <div class="bas">
-                    {% for post in posts %}
-
-          <article>
-                    <h1>{{ post.title }}</h1>
-                    <h1>{{ post.description }}</h1>
-                    <h1>{{ post.category }}</h1>
-               {% endfor %}
-          </article>
+     <div class="detail">
+          {# {{ dump(article) }} #}
+          <div>
+           {% for image in article.images %} 
+               <figure class="container-img">
+                    <img class="img_article" src="{{'uploads/' ~ image.name }}">
+               </figure>
+          {% endfor %} 
+          </div>
+          <div>
+               <h2>{{ article.name }}</h2>
+               <h5>{{ article.price }} €</h5>
+               <p>{{ article.description }}</p>
+          </div>        
+          {# <h6>{{ article.category }}</h6> #}
      </div>
-</div>
 {% endblock %}
 
 

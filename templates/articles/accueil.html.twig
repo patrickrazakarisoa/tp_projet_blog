@@ -4,7 +4,6 @@
 {% endblock %}
 
 {% block body %}
-
 	<div class="bas">
 	{% for article in articles %}
 		{# {{ dump(article)}} #}
@@ -16,12 +15,16 @@
                         </figure>
                     {% endfor %} 
 			
-			<a href=" {{ path('detail_article', {id:article.name}) }}">
+			<a href=" {{ path('detail_article', {id:article.id}) }}">
 				<h1>{{ article.name }}</h1>
 			</a>
+		{% if is_granted('ROLE_ADMIN') %}
 			<a href="{{ path('edit-article', {id : article.id}) }}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
 			<a href="{{ path('delete-article', {id : article.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+		{% endif %}
 		</article>
+					
+
 		{% endfor %}
 	</div>
 </div>{% endblock %}
