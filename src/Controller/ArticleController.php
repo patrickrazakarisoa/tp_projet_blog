@@ -40,7 +40,7 @@ class ArticleController extends AbstractController
 
 
      /**
-      * @Route("/add-article", name="add-article")
+      * @Route("/admin/add-article", name="add-article")
       */
      public function addProduct(Request $request)
      {
@@ -83,7 +83,7 @@ class ArticleController extends AbstractController
      }
 
      /**
-      * @Route("/{id}", name="edit-article")
+      * @Route("/admin/{id}", name="edit-article")
       */
      public function editArticle($id, Request $request)
      {
@@ -128,7 +128,7 @@ class ArticleController extends AbstractController
      }
 
      /**
-      * @Route("/delete-article/{id}", name="delete-article")
+      * @Route("/admin/delete-article/{id}", name="delete-article")
       */
      public function deleteArticle($id)
      {
