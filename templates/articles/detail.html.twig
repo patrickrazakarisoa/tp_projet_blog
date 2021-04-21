@@ -20,6 +20,18 @@
           </div>        
           {# <h6>{{ article.category }}</h6> #}
      </div>
+     <div class="container">
+          <h2>Espace Commentaire</h2>
+          {% if is_granted('ROLE_ADMIN') %}
+               {{form(form)}}
+          {% elseif is_granted('ROLE_USER') %}
+               {{form(form)}}
+          {% endif %}
+
+     	{% for commentaire in commentaires %}
+               <p>{{ commentaire.avis }}</p>
+          {% endfor %} 
+     </div>
 {% endblock %}
 
 
