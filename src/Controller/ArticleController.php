@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Commentaire;
 use App\Entity\Images;
 use App\Form\ArticleType;
+use App\Form\CommentaireType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,14 +29,38 @@ class ArticleController extends AbstractController
      /**
       *@Route("/{id}", name="detail_article")
       */
-     public function article($id)
+     public function article($id, Request $request)
      {
           $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
+
+          $commentaires = $this->getDoctrine()->getRepository(Commentaire::class)->findAll();
+          $new_commentaire = new Commentaire;
+          $form = $this->createForm(CommentaireType::class, $new_commentaire);
+          $form->handleRequest($request);
+
+          if ($form->isSubmitted() && $form->isValid()) {
+
+               // setDate(new \DateTime()) permet de génerer une date automatique lors de la validation
+               $new_commentaire->setDate(new \DateTime());
+               $new_commentaire->setArticle($article);
+               $entityManager = $this->getDoctrine()->getManager();
+               $entityManager->persist($new_commentaire);
+               $entityManager->flush();
+
+               // return $this->redirectToRoute('detail_article');
+          }
+
+
+
           return $this->render('articles/detail.html.twig', [
                "id" => $id,
-               "article" => $article
+               "article" => $article,
+               "commentaires" => $commentaires,
+               "form" => $form->createView()
+
           ]);
      }
+
 
 
 
