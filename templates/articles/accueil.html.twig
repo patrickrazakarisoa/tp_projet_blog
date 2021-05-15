@@ -11,11 +11,11 @@
                {# <img src="https://picsum.photos/300/200?random=1"> #}
 			 {% for image in article.images %} 
                         <figure class="container-img">
-                            <img class="img_article" src="{{'uploads/' ~ image.name }}">
+                            <img class="img_article" src="{{asset('uploads/' ~ image.name) }}">
                         </figure>
                     {% endfor %} 
 			
-			<a href=" {{ path('detail_article', {id:article.id}) }}">
+			<a href=" {{ path('detail_article', {'id': article.id}) }}">
 				<h1>{{ article.name }}</h1>
 			</a>
 		{% if is_granted('ROLE_ADMIN') %}

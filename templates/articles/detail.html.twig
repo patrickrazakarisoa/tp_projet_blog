@@ -9,7 +9,7 @@
           <div>
            {% for image in article.images %} 
                <figure class="container-img">
-                    <img class="img_article" src="{{'uploads/' ~ image.name }}">
+                    <img class="img_article" src="{{asset('uploads/' ~ image.name) }}">
                </figure>
           {% endfor %} 
           </div>
@@ -21,17 +21,44 @@
           {# <h6>{{ article.category }}</h6> #}
      </div>
      <div class="container">
-          <h2>Espace Commentaire</h2>
-          {% if is_granted('ROLE_ADMIN') %}
-               {{form(form)}}
-          {% elseif is_granted('ROLE_USER') %}
-               {{form(form)}}
-          {% endif %}
+          <h2 class="container text-center bg-dark text-white rounded p-2 mt-3">Espace Commentaire</h2>
+          {# {% if is_granted('ROLE_ADMIN') %} #}
+               {# {{form(form)}} #}
+          {# {% elseif is_granted('ROLE_USER') %} #}
+               {# {{form(form)}} #}
+          {# {% endif %} #}
+          <div class="container mt-5 mb-5">
+               {% for comment in article.comments|reverse %}
+                    {% if comment.parent == null %}                   
+                         <p class="container border border-dark mt-5 rounded bg-white ">{{ comment.content }}</p>
+                         <p><a href="#ajout_commentaire" data-reply data-id="{{comment.id}}" class="btn btn-info">Répondre</a></p> <span>
 
-     	{% for commentaire in commentaires %}
-               <p>{{ commentaire.avis }}</p>
-          {% endfor %} 
+                         {# on affiche les réponses #}
+                         {% for reply in comment.replies %}
+                              <div class="container border rounded bg-white mt-1" style="width: 70%;">{{ reply.content }}</div> </span>  
+                         {% endfor %}
+                    {% endif %}
+               {% endfor %}  
+          </div>
+          <div class="container mt-5 mb-5" id="ajout_commentaire">
+               <h3 class="container text-center bg-dark text-white rounded p-2">Ajouter commentaire</h3>
+               <div>{{ form(form)}}</div>               
+          </div>                
      </div>
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+		window.onload = () => {
+			// On met un écouteur d'évènements sur tous les boutons répondre
+			document.querySelectorAll("[data-reply]").forEach(element => {
+				element.addEventListener("click", function(){
+					document.querySelector("#comments_parentid").value = this.dataset.id;
+                         //console.log(this)
+				});
+			});
+		}
+	</script>
 {% endblock %}
 
 

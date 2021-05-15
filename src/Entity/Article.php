@@ -45,14 +45,14 @@ class Article
     private $images;
 
     /**
-     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="article")
+     * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="article", orphanRemoval=true)
      */
-    private $commentaire;
+    private $comments;
 
     public function __construct()
     {
         $this->images = new ArrayCollection();
-        $this->commentaire = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -139,29 +139,29 @@ class Article
     }
 
     /**
-     * @return Collection|Commentaire[]
+     * @return Collection|Comments[]
      */
-    public function getCommentaire(): Collection
+    public function getComments(): Collection
     {
-        return $this->commentaire;
+        return $this->comments;
     }
 
-    public function addCommentaire(Commentaire $commentaire): self
+    public function addComment(Comments $comment): self
     {
-        if (!$this->commentaire->contains($commentaire)) {
-            $this->commentaire[] = $commentaire;
-            $commentaire->setArticle($this);
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setArticle($this);
         }
 
         return $this;
     }
 
-    public function removeCommentaire(Commentaire $commentaire): self
+    public function removeComment(Comments $comment): self
     {
-        if ($this->commentaire->removeElement($commentaire)) {
+        if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
-            if ($commentaire->getArticle() === $this) {
-                $commentaire->setArticle(null);
+            if ($comment->getArticle() === $this) {
+                $comment->setArticle(null);
             }
         }
 
