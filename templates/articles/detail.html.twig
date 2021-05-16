@@ -29,13 +29,15 @@
           {# {% endif %} #}
           <div class="container mt-5 mb-5">
                {% for comment in article.comments|reverse %}
-                    {% if comment.parent == null %}                   
-                         <p class="container border border-dark mt-5 rounded bg-white ">{{ comment.content }}</p>
+                    {% if comment.parent == null %}    
+                              <div class="mt-5"> Publié par {{ app.user.name|capitalize }} le {{ comment.createdAt|date("m/d/Y H:i")}}<div>          
+                         <p class="border border-dark rounded bg-white p-2 pl-3 ">{{ comment.content }}</p>
                          <p><a href="#ajout_commentaire" data-reply data-id="{{comment.id}}" class="btn btn-info">Répondre</a></p> <span>
 
                          {# on affiche les réponses #}
                          {% for reply in comment.replies %}
-                              <div class="container border rounded bg-white mt-1" style="width: 70%;">{{ reply.content }}</div> </span>  
+                                   <div class="ml-5">Publié par {{ app.user.name|capitalize }} le {{ reply.createdAt|date("m/d/Y H:i") }} </div>
+                              <div class="ml-5 border rounded bg-white mt-1 pl-3" style="width: 70%;">{{ reply.content }}</div> </span>  
                          {% endfor %}
                     {% endif %}
                {% endfor %}  

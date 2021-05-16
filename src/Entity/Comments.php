@@ -6,6 +6,7 @@ use App\Repository\CommentsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CommentsRepository::class)
@@ -21,6 +22,7 @@ class Comments
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="veuillez écrire votre {{ value }} avant d'envoyer")
      */
     private $content;
 
@@ -32,7 +34,7 @@ class Comments
     /**
      * @ORM\Column(type="datetime")
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="boolean")
@@ -91,12 +93,12 @@ class Comments
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
