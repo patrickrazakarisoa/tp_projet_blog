@@ -20,19 +20,20 @@
 	<body>
 	<div class="haut">
 		<ul>
-		{% if is_granted('ROLE_ADMIN') %}
 			<li><a href="{{ path('affichage-article')}}">Acceuil</a></li>
+		{% if is_granted('ROLE_ADMIN') %}
 			<li><a href="{{ path('add-article')}}">Ajouter</a></li>
 			<li><a href="{{ path('app_logout')}}">Déconnexion</a></li>
 		{% elseif is_granted('ROLE_USER') %}
-			<li><a href="{{ path('affichage-article')}}">Acceuil</a></li>
 			<li><a href="{{ path('app_logout')}}">Déconnexion</a></li>
 		{% else %}
-			<li><a href="{{ path('affichage-article')}}">Acceuil</a></li>
 			<li><a href="{{ path('app_register')}}">Inscription</a></li>
 			<li><a href="{{ path('app_login')}}">Connexion</a></li>
 		{% endif %}
 			<li><a href="{{ path('contact')}}">Contact</a></li>
+		{% if app.user %}
+			<li><div class="text-white">Bonjour {{ app.user.name|capitalize }}!! </div></li>
+		{% endif %}
 		</ul>
 	</div>
 		{% block body %}

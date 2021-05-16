@@ -36,10 +36,10 @@ class ArticleController extends AbstractController
      /**
       * @Route("/details/article/{id}", name="detail_article")
       */
-    public function details($id, ArticleRepository $articleRepository, Request $request)
+    public function details($id, ArticleRepository $articleRepository, Request $request, CommentsRepository $commentsRepository)
     {
         $article = $articleRepository->findOneBy(['id' => $id]);
-     //    $comments = $commentsRepository->findAll();
+        $comments = $commentsRepository->findAll();
 
         // Partie commentaires
         // On crée le commentaire "vierge"
@@ -61,14 +61,12 @@ class ArticleController extends AbstractController
             // On va chercher le commentaire correspondant
             $em = $this->getDoctrine()->getManager();
 
-            // if($parentid != null){
+            if($parentid != null){
                 $parent = $em->getRepository(Comments::class)->find($parentid);
-            // }
+            }
 
             // On définit le parent
-            $comment->setParent($parent
-            //  ?? null
-            );
+            $comment->setParent($parent ?? null);
 
             $em->persist($comment);
             $em->flush();
@@ -80,6 +78,7 @@ class ArticleController extends AbstractController
         return $this->render('articles/detail.html.twig', [
             'article' => $article, 
             'form' => $form->createView(),
+            'comments' => $comments
         ]);
     }
 }

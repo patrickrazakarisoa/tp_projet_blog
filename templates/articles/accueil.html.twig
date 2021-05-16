@@ -15,7 +15,7 @@
                         </figure>
                     {% endfor %} 
 			
-			<a href=" {{ path('detail_article', {'id': article.id}) }}">
+			<a href=" {{ path('detail_article', {'id': article.id}) }}" style="text-decoration: none;">
 				<h1>{{ article.name }}</h1>
 			</a>
 		{% if is_granted('ROLE_ADMIN') %}

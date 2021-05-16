@@ -25,8 +25,7 @@ class CommentsType extends AbstractType
             ])
             ->add('envoyer', SubmitType::class, [
                 'attr' => [
-                    'class' => 'container btn btn-info'
-                    
+                    'class' => 'container btn btn-info'     
                 ]
             ])
         ;
